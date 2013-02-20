@@ -4,15 +4,10 @@ script_dns
 Script para administrar DNS 
 
 /usr/bin/python
-
 import sys
 import os
-
-
-
 if sys.argv[1] == '-add':       #insertar registro
         tipo = sys.argv[2]
-
         if tipo == '-eq':  #quiere añadir una direccion de tipo A
                 equipo = sys.argv[3] #nombre equipo
                 ip = sys.argv[4]        #direccion ip
@@ -45,8 +40,6 @@ elif sys.argv[1] == '-del':
                 lineas = f.readlines()
                 for delete in lineas:
                         if delete.find
-
-
         elif sys.argv[2] == '-inver': #si el segundo parametro es inver se buscara en el fichero de busqueda inversa
 
         else:
