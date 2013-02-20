@@ -3,11 +3,16 @@ script_dns
 
 Script para administrar DNS 
 
-/usr/bin/python
+!/usr/bin/python
+
 import sys
 import os
+
+
+
 if sys.argv[1] == '-add':       #insertar registro
         tipo = sys.argv[2]
+
         if tipo == '-eq':  #quiere añadir una direccion de tipo A
                 equipo = sys.argv[3] #nombre equipo
                 ip = sys.argv[4]        #direccion ip
@@ -34,16 +39,4 @@ if sys.argv[1] == '-add':       #insertar registro
         else:
                 print 'Algún parámetro no es correcto'
 elif sys.argv[1] == '-del':
-        if sys.argv[2] == '-direct': #si el segundo parametro es direct se buscara en el fichero de busqueda directa   
-        delete == sys.argv[3]
-                f = open('/var/cache/bind/db.iestejero.com','r') #abrimos el fichero
-                lineas = f.readlines()
-                for delete in lineas:
-                        if delete.find
-        elif sys.argv[2] == '-inver': #si el segundo parametro es inver se buscara en el fichero de busqueda inversa
-
-        else:
-                print 'A ocurrido un error al seleccionar el fichero donde buscar la palabra a eliminar'
-else:
-        print 'Algún parámetro no es correcto'
-
+        if sys.argv[2] == '-direct': #si el segundo parametro es direct se buscara en el fichero de busqueda directa    
