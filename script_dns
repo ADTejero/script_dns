@@ -1,0 +1,42 @@
+# -*- coding: utf-8 -*-
+import sys
+import os
+
+op = []
+op = raw_input("Introduce una operacion borrar(del) o añadir(add): ")
+if op == 'add':
+        f = open('/var/cache/bind/db.iestejero.com','a')
+        type = []
+        type = raw_input("Indique el tipo de registro que desea insertar(A,CNAME): ")
+        if type == 'A':
+                finv = open('/var/cache/bind/db.10.168.192','a')
+                host = raw_input("Introduce el nombre del host: ")
+                ip = raw_input("Introduce la direccion ip: ")
+                ipi = ip.split('.')
+                ipinv = ipi[-1]
+                insert1 = host+ '       A       '+ ip +'\n'
+                insert2 = ipinv+'       PTR     '+ host + '.iestejero.com' + '\n'
+                f.write(insert1)
+                finv.write(insert2)
+                os.system('/etc/init.d/bind9 restart')
+                finv.close()
+        elif type == 'CNAME':
+                alias = raw_input("Introduce el nombre del alias: ")
+                host = raw_input("Introduce el nombre del equipo: ")
+                insert = alias + '              CNAME   ' + host + '\n'
+                f.write(insert)
+                os.system('/etc/init.d/bind9 restart')
+        else:
+                print 'Por favor introduzca una operacion valida'
+        f.close()
+elif op == 'del':
+        lookfor = raw_input("Introduce un nombre identificativo del objeto a eliminar: ")
+        cadena = 'grep -v -w '+ lookfor +' /var/cache/bind/db.iestejero.com > temporal.txt'
+        os.system(cadena)
+        os.system('cat temporal.txt > /var/cache/bind/db.iestejero.com')
+        cadena1 = 'grep -v -w '+ lookfor +' /var/cache/bind/db.iestejero.com > temporal.txt'
+        os.system(cadena1)
+        os.system('cat temporal.txt > /var/cache/bind/db.10.168.192')
+        os.system('/etc/init.d/bind9 restart')
+else:
+        print "Por favor verifique que ha introducido todos los datos correctamente"
